@@ -11,12 +11,18 @@
 
 (function() {
     'use strict';
-    const eventListContainer = document.getElementById("all-events-list-container");
-    const config = { attributes: true, childList: true, subtree: true };
-
     const upstream = (message) => {
       window.ReactNativeWebView.postMessage(message);
     }
+    
+    console.log("Helper Triggered")
+    upstream(JSON.stringify({
+            status: 200,
+            data: "triggered",
+            respondingTo: "log",
+    }))
+    const eventListContainer = document.getElementById("all-events-list-container");
+    const config = { attributes: true, childList: true, subtree: true };
 
     const getEvents = () => {
         const target = eventListContainer.children[0]
