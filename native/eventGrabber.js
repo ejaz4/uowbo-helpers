@@ -11,6 +11,7 @@
 
 (function() {
     'use strict';
+    
     const upstream = (message) => {
       window.ReactNativeWebView.postMessage(message);
     }
@@ -21,6 +22,7 @@
             data: "triggered",
             respondingTo: "log",
     }))
+    
     const eventListContainer = document.getElementById("all-events-list-container");
     const config = { attributes: true, childList: true, subtree: true };
 
@@ -64,5 +66,7 @@
     const mutationObserver = new MutationObserver(getEvents);
     mutationObserver.observe(eventListContainer, config);
 
+    // Attempt running if loaded too late
+    try { getEvents() } catch(e) {} 
     // Your code here...
 })();
